@@ -1,0 +1,3 @@
+innovorg_api_token: token
+generation_directory_for_format: lib/
+start_build_runner: true

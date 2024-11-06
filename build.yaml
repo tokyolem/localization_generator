@@ -1,0 +1,27 @@
+builders:
+  public_localization_generator:
+    import: "package:localization_generator/src/generator/builders/localization_builder.dart"
+    builder_factories: [ "publicLocalizationBuilder" ]
+    build_extensions: { ".dart": [ ".gl.dart" ] }
+    auto_apply: dependents
+    # runs_before: [ "source_gen" ]
+    applies_builders: [ "source_gen|combining_builder" ]
+    build_to: source
+
+  client_localization_generator:
+    import: "package:localization_generator/src/generator/builders/localization_builder.dart"
+    builder_factories: [ "clientLocalizationBuilder" ]
+    build_extensions: { ".dart": [ ".gl.dart" ] }
+    auto_apply: dependents
+    # runs_before: [ "source_gen" ]
+    applies_builders: [ "source_gen|combining_builder" ]
+    build_to: source
+
+  localization_config_generator:
+    import: "package:localization_generator/src/generator/builders/localization_builder.dart"
+    builder_factories: [ "localizationConfigBuilder" ]
+    build_extensions: { ".dart": [ ".gl.dart" ] }
+    auto_apply: dependents
+    # runs_before: [ "source_gen" ]
+    applies_builders: [ "source_gen|combining_builder" ]
+    build_to: source
