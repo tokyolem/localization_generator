@@ -1,38 +1,76 @@
 import 'app_localization.public_pages_localization.dart';
 import 'app_localization.client_pages_localization.dart';
 
-abstract class $InnovorgLocalizationConfig {
-  const $InnovorgLocalizationConfig();
+final class $InnovorgClientLocalizationConfig {
+  final Map<String, Map<String, String>> localizationPages;
 
-  $CommonLocalization get commonLocalization;
+  const $InnovorgClientLocalizationConfig({required this.localizationPages});
 
-  $MainMenuLocalization get mainMenuLocalization;
+  $CommonLocalization get commonLocalization =>
+      $CommonLocalization(localizationPages['common'] ?? <String, String>{});
 
-  $DashboardLocalization get dashboardLocalization;
+  $MainMenuLocalization get mainMenuLocalization => $MainMenuLocalization(
+      localizationPages['main_menu'] ?? <String, String>{});
 
-  $EditProfileLocalization get editProfileLocalization;
+  $DashboardLocalization get dashboardLocalization => $DashboardLocalization(
+      localizationPages['dashboard'] ?? <String, String>{});
 
-  $LearningMenuLocalization get learningMenuLocalization;
+  $EditProfileLocalization get editProfileLocalization =>
+      $EditProfileLocalization(
+          localizationPages['edit_profile'] ?? <String, String>{});
 
-  $LearningResourceDetailsLocalization get learningResourceDetailsLocalization;
+  $LearningMenuLocalization get learningMenuLocalization =>
+      $LearningMenuLocalization(
+          localizationPages['learning_menu'] ?? <String, String>{});
 
-  $LearningPathDetailsLocalization get learningPathDetailsLocalization;
+  $LearningResourceDetailsLocalization
+      get learningResourceDetailsLocalization =>
+          $LearningResourceDetailsLocalization(
+              localizationPages['learning_resource_details'] ??
+                  <String, String>{});
 
-  $LearningCampaignDetailsLocalization get learningCampaignDetailsLocalization;
+  $LearningPathDetailsLocalization get learningPathDetailsLocalization =>
+      $LearningPathDetailsLocalization(
+          localizationPages['learning_path_details'] ?? <String, String>{});
 
-  $BrowseResourcesLocalization get browseResourcesLocalization;
+  $LearningCampaignDetailsLocalization
+      get learningCampaignDetailsLocalization =>
+          $LearningCampaignDetailsLocalization(
+              localizationPages['learning_campaign_details'] ??
+                  <String, String>{});
 
-  $BrowseResourcesSortingLocalization get browseResourcesSortingLocalization;
+  $BrowseResourcesLocalization get browseResourcesLocalization =>
+      $BrowseResourcesLocalization(
+          localizationPages['browse_resources'] ?? <String, String>{});
 
-  $BrowseResourcesFiltersLocalization get browseResourcesFiltersLocalization;
+  $BrowseResourcesSortingLocalization get browseResourcesSortingLocalization =>
+      $BrowseResourcesSortingLocalization(
+          localizationPages['browse_resources_sorting'] ?? <String, String>{});
 
-  $BrowsePathsFiltersLocalization get browsePathsFiltersLocalization;
+  $BrowseResourcesFiltersLocalization get browseResourcesFiltersLocalization =>
+      $BrowseResourcesFiltersLocalization(
+          localizationPages['browse_resources_filters'] ?? <String, String>{});
 
-  $SettingsLocalization get settingsLocalization;
+  $BrowsePathsFiltersLocalization get browsePathsFiltersLocalization =>
+      $BrowsePathsFiltersLocalization(
+          localizationPages['browse_paths_filters'] ?? <String, String>{});
 
-  $SupportLocalization get supportLocalization;
+  $SettingsLocalization get settingsLocalization => $SettingsLocalization(
+      localizationPages['settings'] ?? <String, String>{});
 
-  $ResetPasswordLocalization get resetPasswordLocalization;
+  $SupportLocalization get supportLocalization =>
+      $SupportLocalization(localizationPages['support'] ?? <String, String>{});
+}
 
-  $LoginLocalization get loginLocalization;
+final class $InnovorgPublicLocalizationConfig {
+  final Map<String, Map<String, String>> localizationPages;
+
+  const $InnovorgPublicLocalizationConfig({required this.localizationPages});
+
+  $ResetPasswordLocalization get resetPasswordLocalization =>
+      $ResetPasswordLocalization(
+          localizationPages['reset_password'] ?? <String, String>{});
+
+  $LoginLocalization get loginLocalization =>
+      $LoginLocalization(localizationPages['login'] ?? <String, String>{});
 }
