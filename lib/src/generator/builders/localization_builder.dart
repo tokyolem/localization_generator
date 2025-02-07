@@ -1,6 +1,5 @@
 import 'package:build/build.dart';
 import 'package:localization_generator/src/generator/allocators/localization_config_allocators.dart';
-import 'package:localization_generator/src/generator/allocators/localization_module_allocator.dart';
 import 'package:localization_generator/src/generator/allocators/localization_strings_allocator.dart';
 import 'package:localization_generator/src/generator/generator/localization_generator.dart';
 import 'package:localization_generator/utils/constants.dart';

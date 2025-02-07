@@ -48,17 +48,30 @@ final class SimpleLocalizationStringsAllocator extends BaseAllocator {
       final key = strings.keys.elementAt(index).trim();
       final isLastGetter = index == strings.keys.length - 1;
 
-      final getterName = ReCase(key.trim()).camelCase;
-
-      gettersBuffer.writeln(
-        "  String get $getterName => _localizationStrings['$key'] ?? '';",
+      final getterName = _checkKeyForKeyword(
+        ReCase(key.trim()).camelCase,
       );
 
-      if (!isLastGetter) gettersBuffer.writeln('');
+      final getter =
+          "String get $getterName => _localizationStrings['$key'] ?? '';";
+
+      if (!gettersBuffer.toString().contains(getter)) {
+        gettersBuffer.writeln("  $getter");
+        if (!isLastGetter) gettersBuffer.writeln('');
+      }
     }
 
     gettersBuffer.writeln('}');
 
     return gettersBuffer.toString();
+  }
+
+  String _checkKeyForKeyword(String key) {
+    return switch (key) {
+      'in' => 'inNoKeyword',
+      'default' => 'defaultNoKeyword',
+      'for' => 'forNoKeyword',
+      _ => key,
+    };
   }
 }
