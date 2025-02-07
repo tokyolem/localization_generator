@@ -28,6 +28,9 @@ final class LocalizationReceiver {
       },
     );
 
+    print('\n\n\n');
+    print(localizationResponse.body);
+
     if (localizationResponse.statusCode != 200) {
       throw ArgumentError(
         'Localization fetching finished with error.\n'
