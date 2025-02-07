@@ -10,7 +10,7 @@ final class SimpleLocalizationStringsAllocator extends BaseAllocator {
       throw ArgumentError('template must not be null before start allocator');
     }
 
-    for (final localizationEntry in templateStrings!.entries) {
+    for (final localizationEntry in templateStrings!.first.value.entries) {
       final className = allocateClassName(localizationEntry.key);
 
       _buffer
@@ -22,7 +22,8 @@ final class SimpleLocalizationStringsAllocator extends BaseAllocator {
         )
         ..writeln(
           _allocateClassGetters(
-              localizationEntry.value as Map<String, dynamic>),
+            localizationEntry.value as Map<String, dynamic>,
+          ),
         );
     }
 

@@ -2,6 +2,7 @@ import 'package:localization_generator/src/generator/allocators/base/base_alloca
 import 'package:localization_generator/src/generator/allocators/localization_strings_allocator.dart';
 import 'package:recase/recase.dart';
 
+@Deprecated('No use at all')
 final class SimpleLocalizationModulesAllocator extends BaseAllocator {
   final _buffer = StringBuffer();
 
@@ -28,7 +29,7 @@ final class SimpleLocalizationModulesAllocator extends BaseAllocator {
     final stringsAllocator = SimpleLocalizationStringsAllocator()
       ..initializeTemplate(templateStrings!);
 
-    for (final key in templateStrings!.keys) {
+    for (final key in templateStrings!.first.value.keys) {
       final pageLocalizationName = stringsAllocator.allocateClassName(key);
       final camelCaseLocalizationName = ReCase(
         pageLocalizationName.replaceAll(r'$', ''),
@@ -40,9 +41,9 @@ final class SimpleLocalizationModulesAllocator extends BaseAllocator {
     }
 
     generatedBuffer.writeln('const ${_allocateClassName()}() : ');
-    for (var i = 0; i < templateStrings!.keys.length; i++) {
-      final key = templateStrings!.keys.elementAt(i);
-      final isLastField = i == templateStrings!.keys.length - 1;
+    for (var i = 0; i < templateStrings!.length; i++) {
+      final key = templateStrings!.first.value.keys.elementAt(i);
+      final isLastField = i == templateStrings!.first.value.keys.length - 1;
 
       final pageLocalizationName = stringsAllocator.allocateClassName(key);
       final camelCaseLocalizationName = ReCase(

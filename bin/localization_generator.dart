@@ -8,6 +8,7 @@ import 'package:source_gen/source_gen.dart';
 Future<void> main() async {
   final configuration = await YamlParametersReader.mapConfiguration();
   final token = configuration?['innovorg_api_token'];
+  final generateOnly = configuration?['generate_only'] as bool? ?? false;
 
   if (token == null) {
     throw InvalidGenerationSourceError(
@@ -18,23 +19,27 @@ Future<void> main() async {
 
   final receiver = LocalizationReceiver();
   try {
-    final templatePLocalizationPagesJson = await receiver.fetchLocalizationJson(
-      forPublicLocalization: true,
-    );
-    final templateCLocalizationPagesJson = await receiver.fetchLocalizationJson(
-      token: token,
-      forPublicLocalization: false,
-    );
+    if (!generateOnly) {
+      final templatePLocalizationPagesJson =
+          await receiver.fetchLocalizationJson(
+        forPublicLocalization: true,
+      );
+      final templateCLocalizationPagesJson =
+          await receiver.fetchLocalizationJson(
+        token: token,
+        forPublicLocalization: false,
+      );
 
-    LocalizationJsonCreator().createTemplateLocalizationJson(
-      pagesLocalizationJson: templatePLocalizationPagesJson,
-      forPublicLocalizations: true,
-    );
+      LocalizationJsonCreator().createTemplateLocalizationJson(
+        pagesLocalizationJson: templatePLocalizationPagesJson,
+        forPublicLocalizations: true,
+      );
 
-    LocalizationJsonCreator().createTemplateLocalizationJson(
-      pagesLocalizationJson: templateCLocalizationPagesJson,
-      forPublicLocalizations: false,
-    );
+      LocalizationJsonCreator().createTemplateLocalizationJson(
+        pagesLocalizationJson: templateCLocalizationPagesJson,
+        forPublicLocalizations: false,
+      );
+    }
 
     final needStartBuildRunner = configuration?['start_build_runner'];
     if (needStartBuildRunner) await ProcessRunner.runBuildRunner();

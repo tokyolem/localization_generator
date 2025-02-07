@@ -23,22 +23,25 @@ class LocalizationGenerator extends BaseLocalizationGenerator {
   void startGeneration(BuildStep buildStep) {
     final localizationJsonReceiver = BaseLocalizationJsonReceiver();
 
-    final localizationMap = <String, dynamic>{};
+    final localizationEntries = <MapEntry<String, Map<String, dynamic>>>[];
     for (final templatePath in templatePaths) {
-      localizationMap.addAll(
-        localizationJsonReceiver.receiveLocalizationJsons(
-          jsonLocatePath: templatePath,
+      localizationEntries.add(
+        MapEntry(
+          templatePath,
+          localizationJsonReceiver.receiveLocalizationJsons(
+            jsonLocatePath: templatePath,
+          ),
         ),
       );
     }
 
-    if (localizationMap.isEmpty) return;
+    if (localizationEntries.isEmpty) return;
 
     final pathForGeneration = buildStep.allowedOutputs.first.path;
     final generationPrefix = PathsFormatter.filePrefix(pathForGeneration);
 
     allocator
-      ..initializeTemplate(localizationMap)
+      ..initializeTemplate(localizationEntries)
       ..initializePrefix(generationPrefix);
 
     buildStep.writeAsString(

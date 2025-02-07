@@ -1,5 +1,5 @@
 abstract class BaseAllocator {
-  Map<String, dynamic>? templateStrings;
+  List<MapEntry<String, Map<String, dynamic>>>? templateStrings;
 
   String? generationPrefix;
 
@@ -7,8 +7,11 @@ abstract class BaseAllocator {
     throw UnimplementedError();
   }
 
-  void initializeTemplate(Map<String, dynamic> template) =>
-      templateStrings = template;
+  void initializeTemplate(
+    List<MapEntry<String, Map<String, dynamic>>> template,
+  ) {
+    templateStrings = template;
+  }
 
   void initializePrefix(String prefix) => generationPrefix = prefix;
 }
